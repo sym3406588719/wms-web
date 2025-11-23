@@ -1,16 +1,24 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import './assets/global.css'
 import App from './App.vue'
-// 注意：如果使用路由，需要先导入 router
-import router from './router'  // 确保该文件存在且正确配置
+import axios from 'axios'
+import store from './store'
 
-Vue.config.productionTip = false
+// 导入路由实例
+import router from './router'  // 从router目录导入路由配置
+
+// 使用Element UI
 Vue.use(ElementUI)
-
-// 只创建一个 Vue 实例，合并配置
+// 关闭生产环境提示
+Vue.config.productionTip = false
+Vue.prototype.$axios=axios;
+Vue.prototype.$httpUrl='http://localhost:8091'
+// 创建并挂载Vue实例，注入路由
 new Vue({
-  el: '#app',  // 挂载到 #app 元素
-  router,      // 注入路由（如果项目使用路由）
-  render: h => h(App)  // 渲染根组件 App
+  el: '#app',
+  router,  // 将路由实例注入Vue，使整个应用可用
+  store,
+  render: h => h(App)  // 渲染根组件
 })
