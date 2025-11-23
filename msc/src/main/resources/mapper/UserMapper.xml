@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 必须与 UserMapper 接口的全路径一致 -->
+<mapper namespace="com.wms.msc.mapper.UserMapper">
+
+    <!-- 1. 对应 pageC 方法：自定义分页查询（示例：查询所有用户，可根据需求修改 SQL） -->
+    <select id="pageC" resultType="com.wms.msc.entity.User">
+        <!-- IPage 分页参数会自动解析，无需手动写 LIMIT，MyBatis-Plus 会自动拼接 -->
+        SELECT * FROM user 
+        <!-- 可添加自定义条件，如 WHERE status = 1 -->
+    </select>
+
+    <!-- 2. 对应 pageCC 方法：带条件的分页查询（使用 MyBatis-Plus 的 Wrapper 条件） -->
+    <select id="pageCC" resultType="com.wms.msc.entity.User">
+        SELECT * FROM user
+        <!-- ${ew.customSqlSegment} 是 MyBatis-Plus 固定语法，用于拼接 Wrapper 中的条件 -->
+        ${ew.customSqlSegment}
+    </select>
+
+</mapper>

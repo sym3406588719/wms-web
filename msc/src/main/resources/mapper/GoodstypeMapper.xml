@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 确保 namespace 与 Mapper 接口全路径一致 -->
+<mapper namespace="com.wms.msc.mapper.GoodstypeMapper">
+
+    <!-- 通用查询映射结果：已正确关联 Goodstype 实体，无需修改 -->
+    <resultMap id="BaseResultMap" type="com.wms.msc.entity.Goodstype">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列：已包含 Goodstype 所有字段，无需修改 -->
+    <sql id="Base_Column_List">
+        id, name, remark
+    </sql>
+
+    <!-- 分页查询方法：修正表名和 Wrapper 引用 -->
+    <select id="pageCC" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />  <!-- 复用通用列，避免重复编写 -->
+        FROM
+        goodsType  <!-- 修正：改为商品分类表名（需与数据库实际表名一致） -->
+        <where>
+            <!-- 修正：若 Mapper 接口参数加了 @Param("ew")，则用 ${ew.sqlSegment} -->
+            ${ew.sqlSegment}
+        </where>
+        <!-- 可选：添加排序，确保分页结果顺序一致 -->
+        ORDER BY id DESC
+    </select>
+
+</mapper>
