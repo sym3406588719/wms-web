@@ -1,0 +1,23 @@
+<template>
+  <div id="app">
+    <!-- 组件标签用小写 -->
+    <router-view/>
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: 'App',
+  components: {
+
+  }
+}
+</script>
+
+<style>
+#app {
+ height: 100%;
+}
+</style>
+
